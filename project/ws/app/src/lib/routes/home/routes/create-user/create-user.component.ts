@@ -10,6 +10,8 @@ import { environment } from '../../../../../../../../../src/environments/environ
 import { EventService } from '@sunbird-cb/utils'
 import { ProfileV2UtillService } from '../../services/home-utill.service'
 
+// const EMAIL_PATTERN_OLD = /^[a-z0-9_-]+(?:\.[a-z0-9_-]+)*@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,}\.){1,3}(?:\w){2,}$/
+const EMAIL_PATTERN = /^[a-zA-Z0-9]+[a-zA-Z0-9._-]*[a-zA-Z0-9]+@[a-zA-Z0-9]+([-a-zA-Z0-9]*[a-zA-Z0-9]+)?(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,4}$/
 @Component({
   selector: 'ws-app-create-user',
   templateUrl: './create-user.component.html',
@@ -114,7 +116,7 @@ export class CreateUserComponent implements OnInit {
         fname: new FormControl({ value: name, disabled: name ? true : false }, [Validators.required]),
         // lname: new FormControl('', [Validators.required]),
         email: new FormControl({ value: this.profileUtilSvc.transformToEmail(email), disabled: email ? true : false }, [Validators.required,
-        Validators.pattern(/^[a-z0-9_-]+(?:\.[a-z0-9_-]+)*@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,}\.){1,3}(?:\w){2,}$/)]),
+        Validators.pattern(EMAIL_PATTERN)]),
         mobileNumber: new FormControl({ value: mobile, disabled: name ? true : false }, [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.maxLength(10)]),
         role: new FormControl('', [Validators.required, Validators.required]),
         dept: new FormControl(this.orgName, [Validators.required]),
@@ -125,7 +127,7 @@ export class CreateUserComponent implements OnInit {
         fname: new FormControl('', [Validators.required]),
         // lname: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required,
-        Validators.pattern(/^[a-z0-9_-]+(?:\.[a-z0-9_-]+)*@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,}\.){1,3}(?:\w){2,}$/)]),
+        Validators.pattern(EMAIL_PATTERN)]),
         mobileNumber: new FormControl('', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.maxLength(10)]),
         role: new FormControl('', [Validators.required, Validators.required]),
         dept: new FormControl(_.get(this.route, 'snapshot.data.configService.unMappedUser.rootOrg.orgName') || '', [Validators.required]),
